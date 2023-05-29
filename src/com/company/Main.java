@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        String charset = "ASCII";
             System.out.println("Please Enter number that to corresponds to the Operation to want to do:");
             System.out.println("1.Compress");
             System.out.println("2.Decompress");
@@ -20,14 +21,14 @@ public class Main {
                 System.out.println("Specify File Location:");
                 sc.nextLine();
                 String filePath = sc.nextLine();
-                Compressor_LZW lzw = new Compressor_LZW("ASCII");
-                FileReaderWriter frw = new FileReaderWriter(filePath,"ASCII");
+                Compressor_LZW lzw = new Compressor_LZW(charset);
+                FileReaderWriter frw = new FileReaderWriter(filePath,charset);
                 String input = frw.readUnCompressedFile();
                 double input_size = frw.getFileSize(filePath);
                 System.out.println("reading ended, compressing file....");
                 List<Integer> comp_data = lzw.encode(input.toCharArray());
                 System.out.println("compression Complete,Writing File....");
-                double output_size = frw.writeToCompressedFile(comp_data);
+                double output_size = frw.writeCompressedFile(comp_data);
                 System.out.println("CompressionRatio:");
                 System.out.println(output_size/input_size);
                 System.out.println("Exiting...");
@@ -36,8 +37,8 @@ public class Main {
                 System.out.println("Specify File Location:");
                 sc.nextLine();
                 String filePath = sc.nextLine();
-                Compressor_LZW lzw = new Compressor_LZW("ASCII");
-                FileReaderWriter frw = new FileReaderWriter(filePath,"ASCII");
+                Compressor_LZW lzw = new Compressor_LZW(charset);
+                FileReaderWriter frw = new FileReaderWriter(filePath,charset);
                 List<Integer> comp_data = frw.readCompressedFile();
                 System.out.println("reading ended, Decompressing file....");
 
@@ -47,16 +48,15 @@ public class Main {
                 System.out.println("Exiting...");
             }
             else if(option == 3){
-                Compressor_LZW lzw = new Compressor_LZW("ASCII");
+                Compressor_LZW lzw = new Compressor_LZW(charset);
                 System.out.println("Enter original file location: ");
                 sc.nextLine();
                 String filePath = sc.nextLine();
-                FileReaderWriter frw = new FileReaderWriter(filePath,"ASCII");
+                FileReaderWriter frw = new FileReaderWriter(filePath,charset);
                 String input = frw.readUnCompressedFile();
                 System.out.println("Enter compressed file location: ");
-                sc.nextLine();
                 String file2Path = sc.nextLine();
-                FileReaderWriter frw2 = new FileReaderWriter(file2Path,"ASCII");
+                FileReaderWriter frw2 = new FileReaderWriter(file2Path,charset);
                 List<Integer> comp_input = frw2.readCompressedFile();
                 String output = lzw.decode(comp_input);
                 System.out.println("checking for validity:");

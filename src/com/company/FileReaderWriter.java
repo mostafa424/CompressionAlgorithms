@@ -78,7 +78,7 @@ public class FileReaderWriter {
         return getFileSize(path+new_file_name);
     }
 
-    /*public double writeCompressedFile(List<Integer> comp_data){
+    public double writeCompressedFile(List<Integer> comp_data){
         this.filename=this.filename.replace(".txt","");
         String new_file_name = this.filename+"_compressed.txt";
         try {
@@ -105,7 +105,7 @@ public class FileReaderWriter {
             e.printStackTrace();
         }
         return getFileSize(path+new_file_name);
-    }*/
+    }
     public double writeToCompressedFile(List<Integer>comp_data) throws Exception {
         int max = Collections.max(comp_data);
         StringBuilder bits_to_write = new StringBuilder();
